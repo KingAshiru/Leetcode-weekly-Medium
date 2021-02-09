@@ -1,0 +1,13 @@
+class Solution:
+    def interpret(self, command: str) -> str:
+        output = ""
+        for i, char in enumerate(command):
+            if char == 'G':
+                output += 'G'
+            elif char == '(' and command[i+1] == ')':
+                output += 'o'
+            elif char == '(' and command[i+1] == 'a':
+                output += 'al'
+        
+        return output
+            

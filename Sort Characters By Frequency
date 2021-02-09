@@ -1,0 +1,20 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        counter = {}
+        
+        for char in s:
+            if char in counter:
+                counter[char] += 1
+            else:
+                counter[char] = 1
+        
+        counts1 = []
+        
+        for key in sorted(counter, key=counter.get, reverse=True):
+            st = key * counter[key]
+            counts1.append(st)
+        
+        return "".join(counts1)
+            
+        
+        

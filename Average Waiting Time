@@ -1,0 +1,18 @@
+class Solution:
+    def averageWaitingTime(self, customers: List[List[int]]) -> float:
+        arrive = 0
+        duration = 0
+        time_diff = 0
+        wait = customers[0][0]
+        sum_ = 0
+        
+        for customer in customers:
+            arrive = customer[0]
+            duration = customer[1]            
+            wait = max(wait,arrive) + duration
+            time_diff = wait - arrive
+            sum_ += time_diff
+        
+        return sum_/len(customers)
+            
+            

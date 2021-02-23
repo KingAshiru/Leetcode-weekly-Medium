@@ -1,0 +1,17 @@
+class Solution:
+    def lengthOfLongestSubstringTwoDistinct(self, s: str) -> int:
+        maxLength = 0
+        windowStart = 0
+        count = 0
+        check = {}
+        for windowEnd in range(len(s)):
+            if s[windowEnd] not in check:
+                check[s[windowEnd]] = 0
+            check[s[windowEnd]] += 1
+            while len(check) > 2:
+                check[s[windowStart]] -= 1
+                if check[s[windowStart]] == 0:
+                    del check[s[windowStart]]
+                windowStart += 1
+            maxLength = max(maxLength,windowEnd - windowStart + 1)
+        return maxLength

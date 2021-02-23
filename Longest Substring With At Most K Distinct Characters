@@ -8,7 +8,7 @@ class Solution:
             if s[windowEnd] not in check:
                 check[s[windowEnd]] = 0
             check[s[windowEnd]] += 1
-            while len(check) > 2:
+            while len(check) > k:
                 check[s[windowStart]] -= 1
                 if check[s[windowStart]] == 0:
                     del check[s[windowStart]]

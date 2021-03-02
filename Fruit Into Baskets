@@ -1,0 +1,21 @@
+class Solution:
+    def totalFruit(self, tree: List[int]) -> int:
+        windowStart = 0
+        maxLength = 0
+        check = {}
+        
+        for windowEnd in range(len(tree)):
+            if tree[windowEnd] not in check:
+                check[tree[windowEnd]] = 0
+            check[tree[windowEnd]] += 1
+            
+            while len(check) > 2:
+                check[tree[windowStart]] -= 1
+                if check[tree[windowStart]] == 0:
+                    del check[tree[windowStart]]
+                windowStart += 1
+            
+            maxLength = max(maxLength, windowEnd - windowStart + 1)
+            
+        return maxLength
+        

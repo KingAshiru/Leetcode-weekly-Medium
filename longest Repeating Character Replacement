@@ -1,0 +1,18 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        windowStart = maxRepeatCount = maxLength = 0
+        freqMap = {}
+        
+        for windowEnd in range(len(s)):
+            if s[windowEnd] not in freqMap:
+                freqMap[s[windowEnd]] = 0
+            freqMap[s[windowEnd]] += 1
+            maxRepeatCount = max(maxRepeatCount, freqMap[s[windowEnd]])
+            
+            if (windowEnd - windowStart + 1) - maxRepeatCount > k:
+                freqMap[s[windowStart]] -= 1
+                windowStart += 1
+            
+            maxLength = max(maxLength, windowEnd - windowStart + 1)
+        
+        return maxLength

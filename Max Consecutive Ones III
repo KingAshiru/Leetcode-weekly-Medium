@@ -1,0 +1,14 @@
+windowStart = maxRepeatingOnes = maxLength = 0
+        
+        for windowEnd in range(len(A)):
+            if A[windowEnd] == 1:
+                maxRepeatingOnes += 1
+            
+            if (windowEnd - windowStart + 1) - maxRepeatingOnes > K:
+                if A[windowStart] == 1:
+                    maxRepeatingOnes -= 1
+                windowStart += 1
+            
+            maxLength = max(maxLength, windowEnd - windowStart + 1)
+        
+        return maxLength

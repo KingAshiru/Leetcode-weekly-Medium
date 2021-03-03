@@ -1,0 +1,16 @@
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        windowStart = maxRepeatingOnes = maxLength = 0
+        
+        for windowEnd in range(len(nums)):
+            if nums[windowEnd] == 1:
+                maxRepeatingOnes += 1
+            
+            if (windowEnd - windowStart + 1) - maxRepeatingOnes > 1:
+                if nums[windowStart] == 1:
+                    maxRepeatingOnes -= 1
+                windowStart += 1
+            
+            maxLength = max(maxLength, windowEnd - windowStart + 1)
+        
+        return maxLength

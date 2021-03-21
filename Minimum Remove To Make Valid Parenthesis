@@ -1,0 +1,21 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        stack = [] # list([pos, char], ...)
+
+        for i in range(len(s)):
+            char = s[i]
+            if char == ")":
+                if stack and stack[-1][1] == "(":
+                    stack.pop()
+                else:
+                    stack.append([i, char])
+            elif char == "(":
+                stack.append([i, char])
+
+        valid = []
+        stack_help = set(map(lambda x: x[0], stack))
+        for i in range(len(s)):
+            if i not in stack_help:
+                valid.append(s[i])
+
+        return "".join(valid)

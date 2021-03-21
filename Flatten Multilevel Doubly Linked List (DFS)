@@ -1,0 +1,37 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, prev, next, child):
+        self.val = val
+        self.prev = prev
+        self.next = next
+        self.child = child
+"""
+
+class Solution:
+    def flatten(self, head):
+        arr = []
+        self.dfs(head,arr)
+        if not arr: 
+            return None
+
+        for i in range(1, len(arr)):
+            node = arr[i]
+            node.prev = arr[i-1]
+            arr[i-1].next = node 
+
+        return arr[0]
+
+    def dfs(self, node, arr):
+        if not node:
+            return
+
+        arr.append(node)
+        if node.child:
+            self.dfs(node.child, arr)
+        if node.next:
+            self.dfs(node.next, arr)
+
+        node.prev = None
+        node.next = None
+        node.child = None

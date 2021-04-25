@@ -1,0 +1,32 @@
+  class Solution(object):
+    def findPeakElement1(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+  
+        i = 0
+        while i < len(nums):
+            if i > 0 and i < len(nums) - 1:
+                if nums[i - 1] < nums[i] > nums[i + 1]:
+                    return i
+            i += 1
+        return nums.index(max(nums))
+        
+    def findPeakElement2(self, nums):
+            """
+            :type nums: List[int]
+            :rtype: int
+            """
+
+            left = 0
+            right = len(nums) - 1
+
+            while left < right:
+                mid = (left + right) // 2
+                if nums[mid] > nums[mid + 1]:
+                    right = mid
+                else:
+                    left = mid + 1
+
+            return left
